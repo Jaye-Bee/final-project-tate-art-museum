@@ -1,6 +1,6 @@
 # Final Project for Intro to Data Science
 
-## Spring 2020
+## Term YYYY
 
 Team members: 
 
