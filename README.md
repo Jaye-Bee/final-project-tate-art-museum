@@ -4,11 +4,11 @@
 
 Team members: 
 
-- Student 1 [Rei](mailto:rsanchezarias@floridapoly.edu)
+- Student 1: [Rei](mailto:rsanchezarias@floridapoly.edu)
 
-- Student 22 [Student 2](mailto:student2@floridapoly.edu)
+- Student 2: [Student name](mailto:student2@floridapoly.edu)
 
-- Student 33 [Student 3](mailto:student3@floridapoly.edu)
+- Student 3: [Student name](mailto:student3@floridapoly.edu)
 
 
 Our project investigates the main characteristics of popular movies in recent years.
