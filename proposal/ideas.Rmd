@@ -5,7 +5,12 @@ output: html_notebook
 
 ## Section 1. Introduction
 
+Include a brief introduction or motivation here
+
 ## Section 2. Data Analysis Plan
+
+List any initial questions you plan to explore in this project. 
 
 ## Section 3. Data
 
+Include a brief description of your dataset (source, available attributes, format, etc.)
