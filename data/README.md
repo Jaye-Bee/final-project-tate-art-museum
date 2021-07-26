@@ -1,6 +1,6 @@
 # Data Description: IMDB popular movies data
 
-(this is an example only. Edit this file as you see fit. It is recommended that you also include a copy of the original data used for this project in this folder - tyically in `.csv` format)
+(this is an example only. Edit this file as you see fit. It is recommended that you also include a copy of the original data used for this project in this folder - typically in `.csv` format)
 
 We use the `IMDB_movies.csv` dataset available at 
 <https://github.com/reisanar/datasets/blob/master/IMDB_movies.csv>
