@@ -3,14 +3,16 @@ title: "Project Proposal"
 output: html_notebook
 ---
 
+(notice that you can reuse some of the sections below for the final project report)
+
 ## Section 1. Introduction
 
-Include a brief introduction or motivation here
+Include a brief **introduction or motivation** here
 
 ## Section 2. Data Analysis Plan
 
-List any initial questions you plan to explore in this project. 
+List any **initial questions** you plan to explore in this project. 
 
 ## Section 3. Data
 
-Include a brief description of your dataset (source, available attributes, format, etc.)
+Include a brief **description of your dataset** (source, available attributes, format, etc.)
