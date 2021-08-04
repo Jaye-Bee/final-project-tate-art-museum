@@ -1,11 +1,11 @@
-# Data Description: IMDB popular movies data
+# Data Description: Tate Art Museum and its Artists
 
 (this is an example only. Edit this file as you see fit. It is recommended that you also include a copy of the original data used for this project in this folder - typically in `.csv` format)
 
-We use the `IMDB_movies.csv` dataset available at 
-<https://github.com/reisanar/datasets/blob/master/IMDB_movies.csv>
+The dataset used is from TidyTuesday's look at the Tate Art Museum, having two .csv files to look over.
+[https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-12/readme.md](url)
 
-This dataset includes information of popular movies on IMDB in the last 10 years. 
+These datasets include
 
 The data fields included are: Title, Genre, Description, Director, Actors, Year, Runtime, Rating, Votes, Revenue, Metascore (score of the movie on the metacritic website)
 
