@@ -1,14 +1,14 @@
-# Data Description: IMDB popular movies data
+# Data Description: Tate Art Museum - Artists and Exhibits
 
-(this is an example only. Edit this file as you see fit. It is recommended that you also include a copy of the original data used for this project in this folder - typically in `.csv` format)
 
-We use the `IMDB_movies.csv` dataset available at 
-<https://github.com/reisanar/datasets/blob/master/IMDB_movies.csv>
+The datasets used are included here as part of a TidyTuesday set:
+[https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-12/artists.csv](url)
+[https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-12/artwork.csv](url)
 
-This dataset includes information of popular movies on IMDB in the last 10 years. 
+These datasets catalog art exhibits of the Tate Art Museum in London, UK as well as details of their artists and specifications of the pieces themselves.
 
-The data fields included are: Title, Genre, Description, Director, Actors, Year, Runtime, Rating, Votes, Revenue, Metascore (score of the movie on the metacritic website)
 
-Below we include some basic statistics for this datasets, including dimensions and range of years ...
 
-(add basic summary if needed. Notice that the information above can be reused for one of the sections for the final project report)
+The data fields included in _artists.csv_ are: id, name, gender, dates (occasionally just birthyear, but also may include the death year), yearOfBirth, yearOfDeath, placeOfBirth, placeOfDeath and url (which redirects to the piece on the art museum's website).
+
+The data fields included in _artwork.csv_ are: id, accession_number, artist, artistRole (meaning if they were a pupli, artist, etc) artistId, title, dateText, medium (its materials), creditLine (where it was purchased), year (the year it was made) acquisitionYear (year aquired), dimensions, width, height, depth, units, inscription, thumbnailCopyright, thumbnailUrl, and url.
