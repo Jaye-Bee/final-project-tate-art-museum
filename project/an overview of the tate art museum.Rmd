@@ -20,6 +20,7 @@ The Tate Art Museum, located in London, is home to the national collection of 16
   * How many artists haven't passed yet?
   * Where even are the exhibited artists from?
 
+With this project, it aims to observe a new look at an art museum and delve closer to the more minute pieces of the artwork.
 
 ## Loading the Tidyverse and CSV Files
 
