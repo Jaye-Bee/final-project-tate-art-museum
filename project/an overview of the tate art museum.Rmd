@@ -1,5 +1,5 @@
 ---
-title: "An Overview of the Tate Art Museum"
+title: "_An Overview of the Tate Art Museum_"
 output: html_notebook
 ---
 
@@ -11,18 +11,18 @@ output: html_notebook
 </style>
 
 
-## Introduction
+# Introduction
 
 The Tate Art Museum, located in London, is home to the national collection of 16th century of British art and is its national modern art collection, being one of the largest museums of contemporary and modern art in the world. Yet, just what are the specialties of their art exhibits? 
   
-  * What eras of art do they have? 
+  * How varied are the mediums of the pieces?
   * What is their largest piece? Their smallest?
   * How many artists haven't passed yet?
   * Where even are the exhibited artists from?
 
 With this project, it aims to observe a new look at an art museum and delve closer to the more minute pieces of the artwork.
 
-## Loading the Tidyverse and CSV Files
+# Loading the Tidyverse and CSV Files
 
 As a preface, both read_csv files are needed. The _artwork.csv_ includes the specifics of the artwork, and the _artist.csv_ the details of the artist.
 
@@ -40,4 +40,35 @@ artwork
 
 ```{r}
 artists
+```
+
+
+
+## Era Organization
+
+As art pieces are denoted typically by their stylistic choices, sorting the pieces by art era allows any reader to easily see what pieces originated during what time.
+
+```{r}
+#function that sorts artists by era
+art_eras <- artwork %>%
+  mutate(
+    era = case_when(
+          year %in% c(1520:1599) ~ "mannerism",
+          year %in% c(1600:1780) ~ "baroque_rococo",
+          year %in% c(1781:1849) ~ "class_romance_real",
+          year %in% c(1850:1889) ~ "impressionism",
+          year %in% c(1890:1905) ~ "symbol_nouveau_express",
+          year %in% c(1906:1924) ~ "surrealism",
+          year %in% c(1925:1954) ~ "abstract",
+          year %in% c(1955:1969) ~ "popart",
+          year %in% c(1970:2020) ~ "modern",
+          TRUE ~ "unknown"
+    ) ) 
+art_eras    
+   
+```
+
+
+```{r}
+filter(art_eras, era == "modern")
 ```
