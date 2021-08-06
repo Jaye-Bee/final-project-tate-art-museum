@@ -46,7 +46,9 @@ artists
 
 ## Era Organization
 
-As art pieces are denoted typically by their stylistic choices, sorting the pieces by art era allows any reader to easily see what pieces originated during what time.
+As art pieces are denoted typically by their stylistic choices, sorting the pieces by art era allows any reader to easily see what pieces originated during what time. While some of the years of creation are unknown and labeled as such, the rest of the vector gives a broad look at the showcased time periods. Looking through the _artwork_ set shows that there's loads of unknown years for some pieces! However, looking through the __
+
+These classifications also may be a mix of other eras as it was simply easier to classify some in groups rather than alone. In order, the eras would be _Mannerism_, _Baroque_, _Rococo_, _Classicism_, _Romanticism_, _Realism_, _Impressionism_, _Symbolism_, _Art Nouveau_, _Expressionism_, _Surrealism_ (which is an overarching name to _Cubism_, _Futurism_, and _Dadaism_), _Pop Art_, and finally our current art era, _Modernism_.
 
 ```{r}
 #function that sorts artists by era
@@ -64,11 +66,49 @@ art_eras <- artwork %>%
           year %in% c(1970:2020) ~ "modern",
           TRUE ~ "unknown"
     ) ) 
-art_eras    
-   
+art_eras  
 ```
 
+For example, what if you wanted to see the art made during the _surrealism_ era?
 
 ```{r}
-filter(art_eras, era == "modern")
+filter(art_eras, era == "surrealism")
 ```
+
+This prompts a list of artists and their respective work from the years 1906 to 1924 with the "era" category of surrealism from the _artwork.csv_. 
+
+Doing this with the _artists.csv_ would produce a similar result, but is ultimately made moot due to the name of the artists already being displayed.
+
+
+
+
+
+# Prior Exploration
+
+Before answering any of the proposed questions, a brief overview of both datasets is necessary:
+
+```{r}
+summary(artists)
+```
+
+```{r}
+summary(artwork)
+```
+
+
+## Univariate Analysis
+
+As one of the research questions is univariate, specifically plucking it from the summary in a larger format makes for a cleaner read. How many artists _haven't_ passed is a good metric of who some of our modern artists are as well with their birthyears alongside it.
+
+
+
+
+
+
+
+
+
+
+
+
+
