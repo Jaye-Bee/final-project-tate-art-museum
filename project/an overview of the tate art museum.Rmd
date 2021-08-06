@@ -46,7 +46,7 @@ artists
 
 ## Era Organization
 
-As art pieces are denoted typically by their stylistic choices, sorting the pieces by art era allows any reader to easily see what pieces originated during what time. While some of the years of creation are unknown and labeled as such, the rest of the vector gives a broad look at the showcased time periods. Looking through the _artwork_ set shows that there's loads of unknown years for some pieces! However, looking through the __
+As art pieces are denoted typically by their stylistic choices, sorting the pieces by art era allows any reader to easily see what pieces originated during what time. While some of the years of creation are unknown and labeled as such, the rest of the vector gives a broad look at the showcased time periods. Looking through the _artwork_ set shows that there's loads of unknown years for some pieces! However, looking through the _mediums_ and at the actual _urls_ of the pieces themselves on the _artwork_ dataset shows that many may have simply been sketches or smaller works. Thus, they can't be as accurately dated as pieces that were meant to be seen by the public.
 
 These classifications also may be a mix of other eras as it was simply easier to classify some in groups rather than alone. In order, the eras would be _Mannerism_, _Baroque_, _Rococo_, _Classicism_, _Romanticism_, _Realism_, _Impressionism_, _Symbolism_, _Art Nouveau_, _Expressionism_, _Surrealism_ (which is an overarching name to _Cubism_, _Futurism_, and _Dadaism_), _Pop Art_, and finally our current art era, _Modernism_.
 
@@ -98,8 +98,21 @@ summary(artwork)
 
 ## Univariate Analysis
 
-As one of the research questions is univariate, specifically plucking it from the summary in a larger format makes for a cleaner read. How many artists _haven't_ passed is a good metric of who some of our modern artists are as well with their birthyears alongside it.
 
+
+```{r}
+artists %>% 
+  group_by(yearOfBirth) %>% 
+  ggplot() +
+  geom_point(aes(x = yearOfBirth, y = yearOfDeath, color = yearOfBirth))
+```
+
+
+```{r}
+artwork %>% 
+  ggplot() +
+  geom_point(aes(x = medium, y = year, color = medium))
+```
 
 
 
