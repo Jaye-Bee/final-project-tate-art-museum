@@ -1,5 +1,6 @@
 ---
 title: "_An Overview of the Tate Art Museum_"
+author: Jena Baxter - "jbaxter1244@floridapoly.edu"
 output: html_notebook
 ---
 
@@ -13,11 +14,10 @@ output: html_notebook
 
 # Introduction
 
-The Tate Art Museum, located in London, is home to the national collection of 16th century of British art and is its national modern art collection, being one of the largest museums of contemporary and modern art in the world. Yet, just what are the specialties of their art exhibits? 
+The Tate Art Museum, located in London, is home to the national collection of 16th century of British art and is its national modern art collection, being one of the largest museums of contemporary and modern art in the country. Yet, just what are the specialties of their art exhibits? 
   
   * How varied are the mediums of the pieces?
   * What is their largest piece? Their smallest?
-  * How many artists haven't passed yet?
   * Where even are the exhibited artists from?
 
 With this project, it aims to observe a new look at an art museum and delve closer to the more minute pieces of the artwork.
@@ -30,6 +30,7 @@ As a preface, both read_csv files are needed. The _artwork.csv_ includes the spe
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
+library(knitr)
 artwork <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-01-12/artwork.csv')
 artists <- readr::read_csv("https://github.com/tategallery/collection/raw/master/artist_data.csv")
 ```
@@ -95,28 +96,97 @@ summary(artists)
 summary(artwork)
 ```
 
+## Data Exploration
 
-## Univariate Analysis
+As both datasets are incredibly large, organizing it by a much smaller margin makes the data easier to handle. Broader visualizations allow a simple overview of what we're handling.
+
+
+
+### Univariate Analysis
+
+Below is a few basic visuals of the datasets. Specializing and focusing on the broader variables will make combining them for more complex answers later on easier.
+
+#### Art Periods
+
+Through a brief overview of one of the many variables, we can check to see when exactly most pieces come from - era-wise.
+
+```{r}
+filter(count(art_eras, era)) %>% 
+  ggplot() +
+  geom_bar(aes(x = n, y = era, color = era), stat = 'identity')
+```
+The bar graph above shows that over 40,000 of our pieces were made during _Classicism_, _Romanticism_, or _Realism_! Being as the museum is in Europe, it's understandable that most of their pieces come from art periods of high prominence in an older Europe.
+
+
+#### Deaths
+
+We can also see how many artists have died in what year. With the newfound knowledge that most of our pieces are a few centuries old we can assume that most have passed by now.
+
+
+
+
+
+### Bivariate Analysis
+
+
+
+
+
+
+
+
+## Data Analysis
+
+
+
+### How varied are the mediums of the pieces?
+
+
+A commonality between pieces is usually a medium - what they're actually made from. The easiest way to see the _amount_ of each medium is by organizing them by such and having a count of each one. By placing them in a vector, we can also pull out the least and greatest used mediums.
+
+```{r}
+mediums <- artwork %>% 
+  group_by(medium) %>%
+  count(medium)
+mediums
+```
+
+We can see here this list is incredibly extensive! The data shows that the museum went to extensive lengths and care to specify everything in incredible detail, as almost everything in the set is unique. Note as well that some pieces might be made of _multiple pages_, hence why the first few pages of the set include numbers.
+
+For example, [in this image](http://www.tate.org.uk/art/images/work/T/T07/T07711_8.jpg), titled "Self-Portrait Made Using a House Converted into a Pinhole Camera", is actually ten different photographs placed together to make one whole piece. 
+
+
+
+
+
+
+### What is their largest piece? Their smallest?
+
+Being as varied as the art world, organizing their pieces via size is a metric that gives someone who can't be there in person a better understanding of its size.
+
+```{r}
+art_eras %>% 
+  arrange(desc(dimensions)) %>% 
+  select(title, dimensions, medium, artist)
+```
+
+From this sorted table we can see our top piece doesn't even have a set size - but going to the _medium_ column tells us it's actually two video projections! This means, that since the piece _"Consolation Service"_ can be varied in size, the second and actual largest piece would be _"Visceral Canker"_.
+
+
+
+
+## Where even are the exhibited artists from?
+
+With all the vast mediums and countless pieces, where did these creators even start out?
 
 
 
 ```{r}
-artists %>% 
-  group_by(yearOfBirth) %>% 
-  ggplot() +
-  geom_point(aes(x = yearOfBirth, y = yearOfDeath, color = yearOfBirth))
+birthplace <- artists %>% 
+  group_by(placeOfBirth) %>% 
+  count(placeOfBirth) 
+birthplace
 ```
-
-
-```{r}
-artwork %>% 
-  ggplot() +
-  geom_point(aes(x = medium, y = year, color = medium))
-```
-
-
-
-
 
 
 
