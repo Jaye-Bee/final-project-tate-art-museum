@@ -7,7 +7,7 @@ output: html_notebook
 <style type = "text/css">
   body{
   font-family: math;
-  font-size: 12pt;
+  font-size: 13pt;
   }
 </style>
 
@@ -17,7 +17,7 @@ output: html_notebook
 The Tate Art Museum, located in London, is home to the national collection of 16th century of British art and is its national modern art collection, being one of the largest museums of contemporary and modern art in the country. Yet, just what are the specialties of their art exhibits? 
   
   * How varied are the mediums of the pieces?
-  * What is their largest piece? Their smallest?
+  * What is their largest piece?
   * Where even are the exhibited artists from?
 
 With this project, it aims to observe a new look at an art museum and delve closer to the more minute pieces of the artwork.
@@ -30,7 +30,6 @@ As a preface, both read_csv files are needed. The _artwork.csv_ includes the spe
 library(tidyverse)
 library(dplyr)
 library(ggplot2)
-library(knitr)
 artwork <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-01-12/artwork.csv')
 artists <- readr::read_csv("https://github.com/tategallery/collection/raw/master/artist_data.csv")
 ```
@@ -70,6 +69,7 @@ art_eras <- artwork %>%
 art_eras  
 ```
 
+
 For example, what if you wanted to see the art made during the _surrealism_ era?
 
 ```{r}
@@ -101,7 +101,6 @@ summary(artwork)
 As both datasets are incredibly large, organizing it by a much smaller margin makes the data easier to handle. Broader visualizations allow a simple overview of what we're handling.
 
 
-
 ### Univariate Analysis
 
 Below is a few basic visuals of the datasets. Specializing and focusing on the broader variables will make combining them for more complex answers later on easier.
@@ -118,24 +117,50 @@ filter(count(art_eras, era)) %>%
 The bar graph above shows that over 40,000 of our pieces were made during _Classicism_, _Romanticism_, or _Realism_! Being as the museum is in Europe, it's understandable that most of their pieces come from art periods of high prominence in an older Europe.
 
 
-#### Deaths
 
-We can also see how many artists have died in what year. With the newfound knowledge that most of our pieces are a few centuries old we can assume that most have passed by now.
+#### Genders
 
+As another variable includes gender, I expect to see a prominence of male artists to female due to the age of most of the art as well.
 
+```{r}
+filter(count(artists, gender)) %>% 
+  ggplot() +
+  geom_histogram(aes(x = n, y = gender, color = gender), stat = 'identity')
+```
+And the assumption is entirely correct. Just under 3,000 artists are male, while just over 500 are female. However, we also are left with a very small amount of unknown artists more than likely due to a lack of updated data on the set's end or a genuine lack of knowledge for the artist.
 
 
 
 ### Bivariate Analysis
 
+Since many variables in this set include long names, I've opted to leave those variables for other visualizations and instead pose a different look at a combination of data
+
+#### Deaths
+
+We can also see how many artists have died in what year with their genders. With the newfound knowledge that most of our pieces are a few decades or centuries old we can assume that most have passed by now and will be male.
+
+```{r}
+artists %>% 
+  ggplot() +
+  geom_point(aes(x = gender, y = yearOfDeath, color = gender, alpha = 0.25))
+```
+
+And the assumption is correct. The majority of artists have passed and were almost always male, the removed values the warning mentions referring to those who are living.
+
+
+And seen below are artists who've been the more recent of the deaths. We can also filter those recent deaths by gender as well and see our already small amount of female artists is even shorter. I can imagine if the list were of those who were living, it'd be minuscule.
+
+```{r}
+filter(artists, yearOfDeath > 2000) %>% 
+  filter(gender == "Female")
+```
 
 
 
 
 
 
-
-## Data Analysis
+# Data Analysis
 
 
 
@@ -158,9 +183,7 @@ For example, [in this image](http://www.tate.org.uk/art/images/work/T/T07/T07711
 
 
 
-
-
-### What is their largest piece? Their smallest?
+### What is their largest piece?
 
 Being as varied as the art world, organizing their pieces via size is a metric that gives someone who can't be there in person a better understanding of its size.
 
@@ -172,14 +195,14 @@ art_eras %>%
 
 From this sorted table we can see our top piece doesn't even have a set size - but going to the _medium_ column tells us it's actually two video projections! This means, that since the piece _"Consolation Service"_ can be varied in size, the second and actual largest piece would be _"Visceral Canker"_.
 
+It's also noteworthy to add that some pieces later on aren't exactly in order due to the sizes including depth as well. For example, [this piece](https://www.tate.org.uk/art/images/work/T/T07/T07056_10.jpg) called _"Aurocthonous AAAAHHHH"_ is a projection onto colored wood and fabric. Its dimensions _include the projector as well_, thus making the piece wider than it actually is.
+
 
 
 
 ## Where even are the exhibited artists from?
 
-With all the vast mediums and countless pieces, where did these creators even start out?
-
-
+With all the vast mediums and countless pieces, where did these creators even start out? 
 
 ```{r}
 birthplace <- artists %>% 
@@ -187,6 +210,46 @@ birthplace <- artists %>%
   count(placeOfBirth) 
 birthplace
 ```
+
+
+The list above sorts by its specified _state and country_. We can see that many _countries_ are repeated, but there's less states repeated overall. Regardless, the list shows artists came from places as far as Brazil/Brasil and Cuba. Resorting them below gives a greatest-to-least overview of where most were born.
+
+
+```{r}
+birthplace %>% 
+  arrange(desc(n))
+```
+
+Unsurprisingly, most are born in London specifically - it's where the museum _is_ located after all. However, there's a good handful of artists without a birthplace listed. In cases like this, it's more than likely the museum simply didn't catalog or know their birthplace much like the year that some pieces were made.
+
+The importance of asking their locations is more than expected. Knowing where an artist came from gives insight of what kind of culture influenced their work into what it became. For example, though most _modern_ art is avant-garde and confusing, there's always some message behind it that the creator may have came up with, or maybe certain materials and colors were used to reference something from their home country.
+
+
+
+
+
+# Conclusion
+
+Through all of this analyzing, I've felt like the only thing missing was an actual trip to the pieces themselves. We've learned that the majority of the art made was _Classicism_, _Romantic_, or, _Real_, most of the artists were male with less than five hundred women artists total, that most of these artists have since passed, many of the mediums used are incredibly unique and specialized, the largest piece of artwork can be _varied in size_, and that most artists did originate from London itself. Even with all that, however, I had questions that were much smaller answered for me even if it wasn't intentional. I was able to apply the usage of _"mutate"_ and _"case_when"_ to actually make the expansive list that helped create the actual eras of art these pieces came from . I feel my report covers not only the grandiose overview of the Tate Art Museum, but was an incredibly enjoyable display of the work and tools I learned over this summer - both in and out of class.
+
+
+# Future Ideas
+
+As an art museum normally would, they update their records and exhibits when new material arrives. If the NAs of either fill in, or new exhibits are displayed and added to the dataset, I'd happily look into these sets again. Other questions or ideas I had were organizing by year of birth and charting it so, but at the current moment for brevity I left it with death years and simply seeing where they were born. If I also had more time, I'd make a function that changes the metric of the sizes for a bit more ease of understanding just how big the pieces are.
+
+While there's a significant amount more I could have talked on, I feel going just in depth enough to be left with less questions than I began is a wonderful way to end this exploration. More information of the Tate Art Museum sets can be found [here](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-12/readme.md) and the actual Tate Art Museum website can be found [here](https://www.tate.org.uk/).
+
+
+# Citations
+
+The datasets used can be found [here](https://github.com/rfordatascience/tidytuesday/blob/master/data/2021/2021-01-12/readme.md) and also above, and my reference for all the years used to make the dataset _"art_eras"_ can be found [here](https://artincontext.org/art-periods/) with explanations of every era and those uncluded.
+
+
+
+
+
+
+
 
 
 
